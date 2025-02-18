@@ -1,13 +1,21 @@
-import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { Button, buttonVariants } from '@/components/ui/button/button'
 
 export default function Login() {
   return (
     <>
-      <div children={'Login'} />
-      <div>Login</div>
-      <Button className={'px-10'}>
-        <span>Hello</span>
-      </Button>
+      <div className={'gap-4 p-8'}>
+        <Link
+          href={'./auth/sign-up'}
+          className={buttonVariants({ variant: 'primary' })}
+        >
+          Sign-Up
+        </Link>
+
+        <Button asChild>
+          <Link href={'./auth/sign-in'}>Sign-Up</Link>
+        </Button>
+      </div>
     </>
   )
 }
