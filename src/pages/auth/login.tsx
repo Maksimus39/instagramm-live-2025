@@ -1,21 +1,46 @@
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button/button'
+import { useState, KeyboardEvent } from 'react'
 
 export default function Login() {
-  return (
-    <>
-      <div className={'gap-4 p-8'}>
-        <Link
-          href={'./auth/sign-up'}
-          className={buttonVariants({ variant: 'primary' })}
-        >
-          Sign-Up
-        </Link>
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-        <Button asChild>
-          <Link href={'./auth/sign-in'}>Sign-Up</Link>
-        </Button>
+  const handleSubmit = () => {
+    console.log({ email: email, password: password })
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter') {
+      return
+    }
+    handleSubmit()
+  }
+  return (
+    <div className={'h-screen grid place-items-center'}>
+      <div className={'space-y-10'}>
+        <div className={'flex flex-col gap-2'}>
+          <label htmlFor={'email-input'}>Email: </label>
+          <input
+            id={'email-input'}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='email'
+            onKeyDown={handleKeyDown}
+          />
+
+          <div className={'flex flex-col gap-1'}>
+            <label htmlFor={'password-input'}>Password: </label>
+            <input
+              id={'password-input'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='password'
+              onKeyDown={handleKeyDown}
+            />
+          </div>
+        </div>
+
+        <button onClick={handleSubmit}>Sign-in</button>
       </div>
-    </>
+    </div>
   )
 }
